@@ -62,3 +62,5 @@ fi
 #Fish
 echo "Setting Default Shell to fish"
 chsh -s '$(which fish)'
+cd ~/ || exit
+rm -rf ~/.devsetup
