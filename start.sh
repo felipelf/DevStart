@@ -1,13 +1,17 @@
 #!/usr/bin/bash
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    exit
 fi
 hash apt-get 2>/dev/null || { echo >&2 "Your system is not Debian based. Please\
  go to https://github.com/Arengorn/DevStart and request support."; exit 1; }
 cd ~/ || exit
-mkdir ~/.devsetup
-cd ~/.devsetup || exit
+DIRECTORY='$HOME/.devsetup'
+if [ -d "$DIRECTORY" ]; then
+    rm -rf $DIRECTORY
+fi
+mkdir $DIRECTORY
+cd $DIRECTORY || exit
 # General requirements
 echo "Installing Pre-Requisites"
 apt-get install wget git uncrustify ctags apt-get install libncurses5-dev \
@@ -63,4 +67,4 @@ fi
 echo "Setting Default Shell to fish"
 chsh -s '$(which fish)'
 cd ~/ || exit
-rm -rf ~/.devsetup
+rm -rf $DIRECTORY
