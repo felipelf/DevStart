@@ -6,7 +6,7 @@ fi
 hash apt-get 2>/dev/null || { echo >&2 "Your system is not Debian based. Please\
  go to https://github.com/Arengorn/DevStart and request support."; exit 1; }
 cd ~/ || exit
-DIRECTORY='$HOME/.devsetup'
+DIRECTORY=$HOME/.devsetup
 if [ -d "$DIRECTORY" ]; then
     rm -rf $DIRECTORY
 fi
@@ -57,7 +57,7 @@ echo "fi" >> ~/.profile
 # Python
 echo "Installing Python"
 python_version=$(python -c 'import platform; print(platform.python_version())')
-if [ ${python_version:0:1} != "3" ];then
+if [ ${python_version:0:1} != 3 ];then
     echo "alias python=python3" | tee -a ~/.bashrc ~/.config/fish/cofig.fish
     echo "alias pip=pip3" | tee -a ~/.bashrc ~/.config/fish/cofig.fish
 else
